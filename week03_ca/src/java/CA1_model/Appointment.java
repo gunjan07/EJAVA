@@ -9,10 +9,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import java.sql.Timestamp;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
@@ -20,10 +18,7 @@ import javax.persistence.ManyToOne;
  *
  * @author vinayakPriya
  */
-@NamedQueries({
-	@NamedQuery(name = "appointment.findByEmail", 
-			query = "select a from appointment a where a.email like :email")
-})
+@NamedQuery(name = "Appointment.findByEmail", query = "select p.appointments from People p where p.email = :email")
 @Entity
 @Table(name = "appointment")
 public class Appointment {
@@ -32,9 +27,11 @@ public class Appointment {
 	@Column(name = "appt_id")
 	private int appid;
 
+        @Column(name="description")
 	private String description;
         
-        private Timestamp date;
+        @Column(name="appt_date")
+        private Date date;
         
         @JoinColumn(name="pid",referencedColumnName="pid")
         @ManyToOne private People people;
@@ -70,15 +67,22 @@ public class Appointment {
     /**
      * @return the date
      */
-    public Timestamp getDate() {
+    public Date getDate() {
         return date;
     }
 
     /**
      * @param date the date to set
      */
-    public void setDate(Timestamp date) {
+    public void setDate(Date date) {
         this.date = date;
+    }
+
+    /**
+     * @return the people
+     */
+    public People getPeople() {
+        return people;
     }
     
     

@@ -7,12 +7,14 @@ package CA1_EnterpriseBeans;
 
 import CA1_model.Appointment;
 import CA1_model.People;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -22,21 +24,12 @@ import javax.persistence.TypedQuery;
 public class AppointmentBean {
     @PersistenceContext private EntityManager em;
     
-    
-    public Optional<Appointment> get(Integer cid) {
-		return (Optional.ofNullable(
-				em.find(Appointment.class, cid)
-		));
-	}
-    
-    public List<Appointment> findByEmail(String email) {
-		
-		TypedQuery<Appointment> query = em.createNamedQuery(
-				"Team.findByName", Appointment.class);
-		query.setParameter("email", "%" + email + "%");
 
-		List<Appointment> appointments = query.getResultList();
-		return (appointments);
-	}
+    public Collection<Appointment> getAppointments(String email) {
+        System.out.println("insde get appointments");
+         return em.createNamedQuery("Appointment.findByEmail", Appointment.class).setParameter("email", email).getResultList();
+
+//To change body of generated methods, choose Tools | Templates.
+    }
 }
 

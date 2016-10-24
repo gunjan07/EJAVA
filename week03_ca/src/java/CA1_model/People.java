@@ -1,4 +1,5 @@
 package CA1_model;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,10 +30,14 @@ public class People {
 	@Column(name = "pid")
 	private String pid;
 
+        @Column(name = "name")
 	private String name;
         
+        @Column(name = "email")
         private String email;
 
+        @OneToMany (mappedBy="people")
+        private Collection<Appointment> appointments;
     /**
      * @return the name
      */
@@ -73,6 +78,13 @@ public class People {
      */
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    /**
+     * @return the oppointments
+     */
+    public Collection<Appointment> getAppointments() {
+        return appointments;
     }
 
   

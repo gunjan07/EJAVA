@@ -5,7 +5,9 @@
  */
 package CA1_EnterpriseBeans;
 
+import CA1_model.Appointment;
 import CA1_model.People;
+import java.util.Collection;
 import java.util.UUID;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,5 +30,16 @@ public class PeopleBean {
     public People create(People person) {
                em.persist(person);
                return (person);
+    }
+    
+    //private static final String queryString="select po from people p join p.appointment po where (p.email:email)";
+    public Collection<Appointment> findByEmail(String email){
+    System.out.println("email ayaaaaaa"+email);
+        
+        return em.createNamedQuery("Appointment.findByEmail", Appointment.class).setParameter("email", email).getResultList();
+
+        
+        
+        
     }
 }
