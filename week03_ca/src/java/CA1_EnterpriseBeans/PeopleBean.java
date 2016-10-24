@@ -20,6 +20,7 @@ import javax.persistence.TypedQuery;
  *
  * @author vinayakPriya
  */
+@Stateless
 public class PeopleBean {
     
     @PersistenceContext private EntityManager em;
