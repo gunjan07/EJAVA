@@ -1,13 +1,8 @@
 package CA1_model;
 import java.util.Collection;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -81,7 +76,7 @@ public class People {
     }
 
     /**
-     * @return the oppointments
+     * @return the appointments
      */
     public Collection<Appointment> getAppointments() {
         return appointments;

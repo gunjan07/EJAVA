@@ -7,17 +7,10 @@ package CA1_EnterpriseBeans;
 
 import CA1_model.Appointment;
 import CA1_model.People;
-import java.util.Collection;
-import java.util.UUID;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 /**
  *
  * @author vinayakPriya
@@ -33,13 +26,7 @@ public class PeopleBean {
     }
     
     //private static final String queryString="select po from people p join p.appointment po where (p.email:email)";
-    public Collection<Appointment> findByEmail(String email){
-    System.out.println("email ayaaaaaa"+email);
-        
-        return em.createNamedQuery("Appointment.findByEmail", Appointment.class).setParameter("email", email).getResultList();
-
-        
-        
-        
+    public List<Appointment> findByEmail(String email){
+         return em.createNamedQuery("Appointment.findByEmail", Appointment.class).setParameter("email", email).getResultList();       
     }
 }

@@ -7,31 +7,18 @@ package CA1_rest;
 import CA1_EnterpriseBeans.PeopleBean;
 import CA1_model.Appointment;
 import CA1_model.People;
-import java.net.URI;
 import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
-import javax.json.Json;
-import javax.json.JsonArrayBuilder;
-import javax.json.JsonObjectBuilder;
-import javax.json.JsonValue;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriBuilder;
-import javax.ws.rs.core.UriInfo;
 /**
  *
  * @author vinayakPriya
@@ -53,16 +40,16 @@ public class PeopleResource {
     
         @GET
 	@Produces("application/json")
-        public Response verify(@DefaultValue("none") @QueryParam("email") String email) {
+        public Response verify(@QueryParam("email") String email) {
       
-		Collection<Appointment> opt=peopleBean.findByEmail(email);
-                
-                if (opt==null)
+		Collection<Appointment> checkemail=peopleBean.findByEmail(email);
+                if (checkemail.isEmpty())
+                {
 			return (Response
 					.status(Response.Status.NOT_FOUND)
 					.entity("Not found: email=" + email)
 					.build());
-                
+                }
                     return (Response.ok().build());
         }
         
