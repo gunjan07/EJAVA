@@ -25,7 +25,6 @@ public class PeopleBean {
                return (person);
     }
     
-    //private static final String queryString="select po from people p join p.appointment po where (p.email:email)";
     public List<Appointment> findByEmail(String email){
          return em.createNamedQuery("Appointment.findByEmail", Appointment.class).setParameter("email", email).getResultList();       
     }

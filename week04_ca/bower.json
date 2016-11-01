@@ -1,0 +1,14 @@
+{
+  "name": "week04_ca",
+  "homepage": "https://github.com/privin/EJAVA",
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

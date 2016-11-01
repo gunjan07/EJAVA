@@ -51,7 +51,6 @@ public class AppointmentResource {
                 {
                    
                      JsonObjectBuilder appointmentdetails = Json.createObjectBuilder();
-                
                         appointmentdetails.add("appointmentID",c.getAppid());
                         appointmentdetails.add("dateTime", c.getDate().toString());
                         appointmentdetails.add("description",c.getDescription());
