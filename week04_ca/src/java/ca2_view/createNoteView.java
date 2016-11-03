@@ -114,8 +114,8 @@ public class createNoteView {
         this.note_date = note_date;
     }
     
-    
-     public void createNote(){
+   
+     public String createNote(){
         Notes note=new Notes();
         note.setNotesid(notesid);
         note.setNote_date(new Date());
@@ -146,6 +146,8 @@ public class createNoteView {
         });
         
         });
+        
+        return ("Menu");
                        
     }
 }

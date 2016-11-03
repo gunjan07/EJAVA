@@ -8,7 +8,6 @@ import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 /**
@@ -43,9 +42,7 @@ public class LoginView implements Serializable {
 				(HttpServletRequest)FacesContext.getCurrentInstance()
 						.getExternalContext().getRequest();
 		try {
-                    System.out.println("entered login");
-                    
-			req.login(username, password);
+                        req.login(username, password);
                     
 		} catch (Throwable t) {
 			FacesContext.getCurrentInstance()
@@ -55,5 +52,6 @@ public class LoginView implements Serializable {
 
 		return ("secure/Menu");
 	}
+     
 
 }

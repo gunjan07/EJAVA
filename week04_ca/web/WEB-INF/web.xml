@@ -19,7 +19,7 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/Login.xhtml</welcome-file>
+        <welcome-file>faces/register.xhtml</welcome-file>
     </welcome-file-list>
     <security-constraint>
         <display-name>Constraint1</display-name>
@@ -37,8 +37,8 @@
         <auth-method>FORM</auth-method>
         <realm-name>jdbcRealm</realm-name>
         <form-login-config>
-            <form-login-page>/Login.xhtml</form-login-page>
-            <form-error-page>/Error.xhtml</form-error-page>
+            <form-login-page>/faces/Login.xhtml</form-login-page>
+            <form-error-page>/faces/Error.xhtml</form-error-page>
         </form-login-config>
     </login-config>
     <security-role>

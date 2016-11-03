@@ -19,7 +19,6 @@ import javax.persistence.Table;
  * @author vinayakPriya
  */
 @NamedQuery(name = "Notes.findById", query = "select p.notes from Users p where p.userid = :userid")
-
 @Entity
 @Table(name = "notes")
 public class Notes {

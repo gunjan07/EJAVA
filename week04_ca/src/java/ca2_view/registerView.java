@@ -57,7 +57,8 @@ public class registerView {
         this.password = password;
     }
     
-    public void registerUser(){
+    public String registerUser(){
+        System.out.println("entered register");
         Users user=new Users();
         user.setUserid(username);
         final String hash = DigestUtils.sha256Hex(password);
@@ -69,6 +70,7 @@ public class registerView {
         group.setGroupId(grpId);
         usersBean.create(user);
         groupsBean.create(group);
+        return ("Login");
     }
     
 }

@@ -7,21 +7,21 @@ $(function() {
 	var socket= new WebSocket(url);
 
 	$("#displayBtn").on("click", function() {
-            console.log("button clicked");
-            console.log("selected");
-            console.log($("#category").val());
-            socket.send($("#category").val());
+               socket.send($("#category").val());
 		
 	});
 
 	socket.onmessage = function(evt) {
 		// {message: "the message" , timestamp: "time" }
 		var msg = JSON.parse(evt.data);
-                console.log(msg);
-		writeToNoticeBoard(msg.date + ": " + msg.by +": "+msg.title+":"+msg.content+": "+msg.category);
+               
+                writeToNoticeBoard("Created on : "+msg.date+",  Created By : "+msg.by +"\n");
+                writeToNoticeBoard("Content : "+msg.content);
+                writeToNoticeBoard("Note Title : "+ msg.title);
+                
 	};
 	socket.onopen = function() {
-		writeToNoticeBoard("Connected to  server");
+		
                
 	};
 	socket.onclose = function() {

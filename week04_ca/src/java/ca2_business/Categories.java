@@ -13,7 +13,6 @@ import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import javax.enterprise.context.ApplicationScoped;
-import javax.json.JsonObject;
 import javax.websocket.Session;
 
 /**
@@ -27,22 +26,14 @@ public class Categories {
     private Map<String,List<Session>> categories=new HashMap<>();
     
     public void addSession(String category,Session session){
-        System.out.println("inside add session");
-        System.out.println("category"+category);
-        List<Session> allsessions=categories.computeIfAbsent(category,s->new LinkedList<>());
-        allsessions.add(session);
-        System.out.println("print categories");
-        System.out.println(categories.toString());
-    }
+          List<Session> allsessions=categories.computeIfAbsent(category,s->new LinkedList<>());
+          allsessions.add(session);
+         }
     
     public void broadcast(String category,String note){
-        System.out.println("inside broadcast"+category);
-        System.out.println("NOte is"+note);
-        System.out.println(categories.get(category));
-        categories.get(category).stream().forEach(s->{
+          categories.get(category).stream().forEach(s->{
             try{
-                System.out.println("inside try method");
-                s.getBasicRemote().sendText(note);
+                  s.getBasicRemote().sendText(note);
             }catch(IOException ex){
                 categories.get(category).remove(categories.get(category).indexOf(s));
             }

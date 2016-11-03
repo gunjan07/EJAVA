@@ -5,6 +5,11 @@
  */
 package ca2_view;
 import ca2_business.Categories;
+import ca2_business.NotesBean;
+import javax.annotation.Resource;
+import javax.ejb.EJB;
+import javax.enterprise.concurrent.ManagedExecutorService;
+import javax.enterprise.concurrent.ManagedScheduledExecutorService;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -29,15 +34,14 @@ import javax.websocket.server.ServerEndpoint;
 @ServerEndpoint("/display")
 public class displayView {
 
-	//@Resource(lookup = "concurrent/myThreadPool") private ManagedScheduledExecutorService executor;
+	@Resource(lookup = "concurrent/myThreadPool") private ManagedExecutorService service;
         private String category;
         @Inject private Categories categories;
+        @EJB private NotesBean notesBean;
         
 	@OnOpen
 	public void open(Session session) {
-              
-		System.out.println(">>> new connection: " + session.getId());
-                
+       	System.out.println(">>> new connection: " + session.getId());
                  
 	}
 
@@ -47,6 +51,15 @@ public class displayView {
                 System.out.println("inside on message"+session.getId());
                 this.category=msg;
                 categories.lock(()->{categories.addSession(category, session);});
+                
+//                service.submit(()->{
+//                categories.lock(()->{
+//                   
+//                    s.getBasicRemote().sendText(note);
+//                }
+//                categories.broadcast(note.getCategory(), message);
+//                 });
+                
 //
 //		executor.submit(new Runnable() {
 //			@Override
@@ -71,10 +84,10 @@ public class displayView {
         
         @OnClose
         public void Close(Session session){
-            //categories.lock(()->{
+            categories.lock(()->{
         
-             //categories.remove(category, session);   
-           // });
+             categories.remove(category, session);   
+            });
             
         }
 }
