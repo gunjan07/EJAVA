@@ -2,12 +2,9 @@ $(function() {
 
 	var writeToNoticeBoard = function(text) {
 		$("#chatarea").val(text + "\n" + $("#chatarea").val());
-	}
-
-	var url = "ws://localhost:8080/week04_ca/display";
-        console.log("url");
-        console.log(url);
-	var socket = new WebSocket(url);
+	};
+        var url = "ws://localhost:8080/week04_ca/display";
+	var socket= new WebSocket(url);
 
 	$("#displayBtn").on("click", function() {
             console.log("button clicked");
@@ -20,15 +17,16 @@ $(function() {
 	socket.onmessage = function(evt) {
 		// {message: "the message" , timestamp: "time" }
 		var msg = JSON.parse(evt.data);
-		writeToNoticeBoard(msg.timestamp + ": " + msg.message);
-	}
+                console.log(msg);
+		writeToNoticeBoard(msg.date + ": " + msg.by +": "+msg.title+":"+msg.content+": "+msg.category);
+	};
 	socket.onopen = function() {
 		writeToNoticeBoard("Connected to  server");
                
-	}
+	};
 	socket.onclose = function() {
 		writeToNoticeBoard("Disconnected from  server");
-	}
+	};
 
 });
 

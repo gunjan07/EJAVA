@@ -13,8 +13,11 @@ import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
+import javax.websocket.server.PathParam;
+
 
 import javax.websocket.server.ServerEndpoint;
+
 
 
 /**
@@ -27,18 +30,23 @@ import javax.websocket.server.ServerEndpoint;
 public class displayView {
 
 	//@Resource(lookup = "concurrent/myThreadPool") private ManagedScheduledExecutorService executor;
-        //@PathParam("category") private String category;
+        private String category;
         @Inject private Categories categories;
         
 	@OnOpen
 	public void open(Session session) {
+              
 		System.out.println(">>> new connection: " + session.getId());
-               // categories.lock(()->{categories.addSession(category, session);});
+                
+                 
 	}
 
 	@OnMessage
 	public void message(final Session session, final String msg) {
-//		System.out.println(">>> message: " + msg);
+		System.out.println(">>> message: " + msg);
+                System.out.println("inside on message"+session.getId());
+                this.category=msg;
+                categories.lock(()->{categories.addSession(category, session);});
 //
 //		executor.submit(new Runnable() {
 //			@Override
@@ -63,10 +71,10 @@ public class displayView {
         
         @OnClose
         public void Close(Session session){
-            categories.lock(()->{
+            //categories.lock(()->{
         
              //categories.remove(category, session);   
-            });
+           // });
             
         }
 }

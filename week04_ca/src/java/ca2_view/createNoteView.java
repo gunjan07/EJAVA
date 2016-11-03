@@ -6,30 +6,18 @@
 package ca2_view;
 
 import ca2_business.Categories;
-import ca2_business.GroupsBean;
 import ca2_business.NotesBean;
 import ca2_business.UsersBean;
-import ca2_model.GroupId;
-import ca2_model.Groups;
 import ca2_model.Notes;
-import static ca2_model.Notes_.user;
-import ca2_model.Users;
 import java.util.Date;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.enterprise.concurrent.ManagedExecutorService;
-import javax.enterprise.concurrent.ManagedScheduledExecutorService;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.json.Json;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import org.apache.commons.codec.digest.DigestUtils;
+
 
 /**
  *
@@ -136,17 +124,25 @@ public class createNoteView {
         note.setContent(content);
         note.setUser(userBean.findById(login.getUsername()));
         notesBean.create(note);
+        System.out.println("after creating note");
         String message=Json.createObjectBuilder()
-                                .add("Title",note.getTitle())
-                                .add("Post Date and Time",note.getNote_date().toString())
-                                .add("Who", note.getUser().getUserid())
+                                .add("title",note.getTitle())
+                                .add("date",note.getNote_date().toString())
+                                .add("by", note.getUser().getUserid())
                                 .add("category",note.getCategory())
-                                .add("Content",note.getContent())
+                                .add("content",note.getContent())
                                 .build()
                                 .toString();
         service.submit(()->{
         categories.lock(()->{
         categories.broadcast(note.getCategory(), message);
+        });
+        
+        });
+        
+        service.submit(()->{
+        categories.lock(()->{
+        categories.broadcast("all", message);
         });
         
         });

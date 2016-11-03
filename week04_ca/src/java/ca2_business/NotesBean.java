@@ -21,11 +21,11 @@ public class NotesBean {
     
      @PersistenceContext private EntityManager em;
     
-    public Notes create(Notes note) {
+    public int create(Notes note) {
 			em.persist(note);
                         System.out.println("created note");
                         
-                        return (note);
+                        return 1;
 	}
     
 }

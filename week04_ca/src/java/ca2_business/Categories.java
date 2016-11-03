@@ -27,13 +27,21 @@ public class Categories {
     private Map<String,List<Session>> categories=new HashMap<>();
     
     public void addSession(String category,Session session){
+        System.out.println("inside add session");
+        System.out.println("category"+category);
         List<Session> allsessions=categories.computeIfAbsent(category,s->new LinkedList<>());
         allsessions.add(session);
+        System.out.println("print categories");
+        System.out.println(categories.toString());
     }
     
     public void broadcast(String category,String note){
+        System.out.println("inside broadcast"+category);
+        System.out.println("NOte is"+note);
+        System.out.println(categories.get(category));
         categories.get(category).stream().forEach(s->{
             try{
+                System.out.println("inside try method");
                 s.getBasicRemote().sendText(note);
             }catch(IOException ex){
                 categories.get(category).remove(categories.get(category).indexOf(s));
