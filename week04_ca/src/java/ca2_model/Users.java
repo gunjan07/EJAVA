@@ -4,9 +4,12 @@
  * and open the template in the editor.
  */
 package ca2_model;
+import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -25,6 +28,8 @@ public class Users {
 	private String password;
 
 
+        @OneToMany (mappedBy="user")
+        private Collection<Notes> notes;
     /**
      * @return the userid
      */
@@ -52,6 +57,13 @@ public class Users {
      */
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    /**
+     * @return the notes
+     */
+    public Collection<Notes> getNotes() {
+        return notes;
     }
     
     

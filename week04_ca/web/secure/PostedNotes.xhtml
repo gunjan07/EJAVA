@@ -2,32 +2,35 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
         <h1>My PostedNotes</h1>
+        
             <h:form>
-              <h:dataTable value="#{userData.employees}" var="employee"
+                <h:commandButton value="Show" action="#{postedNotesView.getDisplayNotes()}"/>
+              <h:dataTable value="#{postedNotesView.notes}" var="note"
                  styleClass="employeeTable"
                  headerClass="employeeTableHeader"
                  rowClasses="employeeTableOddRow,employeeTableEvenRow">
                  <h:column>    				
                     <f:facet name="header">Title</f:facet>    				
-                    #{employee.name}
+                    #{note.title}
                  </h:column>
                  <h:column>
-                    <f:facet name="header">Date & Time</f:facet>
-                    #{employee.department}
+                    <f:facet name="header">Date and Time</f:facet>
+                     #{note.note_date}
                  </h:column>
                  <h:column>
                     <f:facet name="header">Category</f:facet>
-                    #{employee.age}
+                  #{note.category}
                  </h:column>
                  <h:column>
                     <f:facet name="header">Content</f:facet>
-                    #{employee.salary}
+                    #{note.content}
                  </h:column>
               </h:dataTable>
             </h:form>

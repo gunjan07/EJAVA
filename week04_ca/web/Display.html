@@ -6,12 +6,13 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		<!-- load libs -->
-                <link rel="stylesheet" href="bowerComponents/bootstrap/dist/css/bootstrap.css">
-                <script src="bowerComponents/jquery/dist/jquery.min.js"></script>
-		<script src="bowerComponents/bootstrap/dist/js/bootstrap.min.js"></script>
-
+                <link href="bowerComponents/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+                <script src="bowerComponents/jquery/dist/jquery.min.js" type="text/javascript"></script>
+                <link href="bowerComponents/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+              
 		<!-- load app -->
-		<script src="chat.js"></script>
+		
+                <script src="resources/js/notes.js" type="text/javascript"></script>
 	</head>
 	<body>
 		<div class="container">
@@ -19,23 +20,26 @@
 			<h1>Notes Displayed</h1>
 
 			<form>
+                         <div class="form-group">
+                                <select id="category" class="selectpicker form-control">
+                                            <option>Social</option>
+                                            <option>For Sale</option>
+                                            <option>Jobs</option>
+                                            <option>Tuition</option>
+                                </select>
+                             
+                                 <div class="input-group-btn">
+						<button class="btn btn-warning" type="button" id="displayBtn">
+								Display
+						</button>
+				</div>
+                        </div>
 				<div class="form-group">
 					<label for="chatarea">Chats:</label>
 					<textarea id="chatarea" rows="10" disabled class="form-control"></textarea>
 				</div>
 
-				<div class="form-group">
-					<label for="message">Message:</label>
-					<div class="input-group">
-						<input id="message" type="text" placeholder="Your message"
-							   class="form-control">
-						<div class="input-group-btn">
-							<button class="btn btn-warning" type="button" id="sendBtn">
-								Send
-							</button>
-						</div>
-					</div>
-				</div>
+				
 
 			</form>
 

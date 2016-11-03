@@ -7,14 +7,15 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
+       
 		<h1>Create Note</h1>
 		<h:form>
 			<h:panelGrid columns="2">
 				Title : 
-				<h:inputText value="#{loginView.username}"/>
+                                <h:inputText id="title" value="#{createNoteView.title}"/>
 
 				Category :
-				<h:selectOneRadio value="#{user.favColor1}">
+                                <h:selectOneRadio id="category" value="#{createNoteView.category}">
                                     <f:selectItem itemValue="social" itemLabel="Social" />
                                     <f:selectItem itemValue="forSale" itemLabel="For Sale" />
                                     <f:selectItem itemValue="jobs" itemLabel="Jobs" />
@@ -22,10 +23,10 @@
                                 </h:selectOneRadio>
                                 
                                 Content : 
-                                <h:inputTextarea rows="10" cols="10" value="#{loginView.username}"/>
+                                <h:inputTextarea id="content" rows="10" cols="10" value="#{createNoteView.content}"/>
 
 				<h:panelGroup/>
-				<h:commandButton value="Create Note" action="#{loginView.login()}"/>
+                                <h:commandButton value="Create Note" id="createNote" action="#{createNoteView.createNote()}"/>
 			</h:panelGrid>
 		</h:form>
     </h:body>

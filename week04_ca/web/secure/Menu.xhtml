@@ -6,11 +6,12 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-		<h1> Menu </h1>
+		
 		<h:form>
+                    <h1> Menu </h1>
 			<h:panelGrid columns="2">
-				<h:commandButton value="Create Note" action="#{loginView.login()}"/>
-                                <h:commandButton value="My PostedNotes " action="#{loginView.login()}"/>
+				   <h:link value="Create Note" outcome="CreateNote" />
+                                   <h:link value="Show Notes" outcome="PostedNotes" />
 			</h:panelGrid>
 		</h:form>
     </h:body>
