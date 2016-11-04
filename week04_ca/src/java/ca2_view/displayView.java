@@ -6,10 +6,13 @@
 package ca2_view;
 import ca2_business.Categories;
 import ca2_business.NotesBean;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.enterprise.concurrent.ManagedExecutorService;
-import javax.enterprise.concurrent.ManagedScheduledExecutorService;
+
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -18,7 +21,7 @@ import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
-import javax.websocket.server.PathParam;
+
 
 
 import javax.websocket.server.ServerEndpoint;
@@ -48,37 +51,20 @@ public class displayView {
 	@OnMessage
 	public void message(final Session session, final String msg) {
 		System.out.println(">>> message: " + msg);
-                System.out.println("inside on message"+session.getId());
                 this.category=msg;
                 categories.lock(()->{categories.addSession(category, session);});
-                
-//                service.submit(()->{
-//                categories.lock(()->{
-//                   
-//                    s.getBasicRemote().sendText(note);
-//                }
-//                categories.broadcast(note.getCategory(), message);
-//                 });
-                
-//
-//		executor.submit(new Runnable() {
-//			@Override
-//			public void run() {
-//				System.out.println(">>> in thread");
-//				final JsonObject message = Json.createObjectBuilder()
-//						.add("message", msg)
-//						.add("timestamp", (new Date()).toString())
-//						.build();
-//
-//				for (Session s: session.getOpenSessions())
-//					try {
-//						s.getBasicRemote().sendText(message.toString());
-//					} catch(IOException ex) {
-//						try { s.close(); } catch (IOException e) { }
-//					}
-//			}
-//		});
-//		System.out.println(">>> exiting message");
+                String allNotes=notesBean.getAllNotes(category);
+            try {
+                session.getBasicRemote().sendText(allNotes);
+
+            } catch (IOException ex) {
+                    try {
+                        session.close();
+                    } catch (IOException ex1) {
+                        Logger.getLogger(displayView.class.getName()).log(Level.SEVERE, null, ex1);
+                    }
+                Logger.getLogger(displayView.class.getName()).log(Level.SEVERE, null, ex);
+            }
 	}
 	
         

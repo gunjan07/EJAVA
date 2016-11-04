@@ -7,8 +7,12 @@ package ca2_business;
 
 import ca2_model.Notes;
 import javax.ejb.Stateless;
+import javax.json.Json;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObjectBuilder;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -17,32 +21,41 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class NotesBean {
     
-    private static final String queryString="Select * from Notes n where (n.category = :categoryId)";
+    
+    private static final String queryString="Select n from Notes n where (n.category = :categoryId)";
+    private static final String queryStringAll="Select n from Notes n";
     @PersistenceContext private EntityManager em;
     
-    public int create(Notes note) {
+    public void create(Notes note) {
 			em.persist(note);
-                        System.out.println("created note");
-                        
-                        return 1;
+                         
 	}
     
     public String getAllNotes(String category) {
-//        TypedQuery<Notes> query=em.createQuery(queryString,Notes.class);
-//                                query.setParameter("categoryId",category);
-//                              
-//                        for(note in )
-//                                
-//                              String message=Json.createObjectBuilder()
-//                                .add("title",note.getTitle())
-//                                .add("date",note.getNote_date().toString())
-//                                .add("by", note.getUser().getUserid())
-//                                .add("category",note.getCategory())
-//                                .add("content",note.getContent())
-//                                .build()
-//                                .toString();
-//         
-                return "";
+        
+        TypedQuery<Notes> query;
+        if(category.matches("all")){
+            query=em.createQuery(queryStringAll,Notes.class);
+                                   
+        }
+        else{
+            query=em.createQuery(queryString,Notes.class);
+            query.setParameter("categoryId",category);
+        }
+        JsonArrayBuilder message=Json.createArrayBuilder();
+                 for(Notes n: query.getResultList()) 
+                {
+                   
+                     JsonObjectBuilder note = Json.createObjectBuilder();
+                        note.add("title",n.getTitle());
+                        note.add("date",n.getNote_date().toString());
+                        note.add("by", n.getUser().getUserid());
+                        note.add("category",n.getCategory());
+                        note.add("content",n.getContent());
+                        message.add(note);
+                }
+                        
+                return message.build().toString();
 	}
     
 }

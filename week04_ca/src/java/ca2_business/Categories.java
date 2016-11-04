@@ -46,12 +46,12 @@ public class Categories {
     }
  
  public void lock(Runnable block){
-     lock.lock();
-     try{
+         lock.lock();
+        try{
          block.run();
-     }
+            }
      finally{
          lock.unlock();
-     }
+            }
 }
 }

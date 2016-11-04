@@ -7,8 +7,6 @@ package ca2_business;
 import ca2_model.Notes;
 import ca2_model.Users;
 import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -22,10 +20,10 @@ public class UsersBean {
     
     @PersistenceContext private EntityManager em;
     
-    public Users create(Users user) {
+    public void create(Users user) {
 			em.persist(user);
                         System.out.println("created user");
-                        return (user);
+                        
 	}
     
     public Users findById(String userId){

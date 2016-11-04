@@ -14,12 +14,25 @@ $(function() {
 	socket.onmessage = function(evt) {
 		// {message: "the message" , timestamp: "time" }
 		var msg = JSON.parse(evt.data);
+                if(msg.length>0)
+                {msg.forEach(function (d){
+                    print(d);
+                    });
+                }
+                else{
+                    print(msg);
+                }
                
-                writeToNoticeBoard("Created on : "+msg.date+",  Created By : "+msg.by +"\n");
-                writeToNoticeBoard("Content : "+msg.content);
-                writeToNoticeBoard("Note Title : "+ msg.title);
-                
 	};
+        
+        var print=function(d){
+            
+                writeToNoticeBoard("Created on : "+d.date+",  Created By : "+d.by +"\n");
+                writeToNoticeBoard("Content : "+d.content);
+                writeToNoticeBoard("Note Title : "+ d.title+",  Category: "+d.category);
+                
+        }
+        
 	socket.onopen = function() {
 		
                
