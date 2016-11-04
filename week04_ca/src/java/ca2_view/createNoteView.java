@@ -124,7 +124,6 @@ public class createNoteView {
         note.setContent(content);
         note.setUser(userBean.findById(login.getUsername()));
         notesBean.create(note);
-        System.out.println("after creating note");
         String message=Json.createObjectBuilder()
                                 .add("title",note.getTitle())
                                 .add("date",note.getNote_date().toString())
