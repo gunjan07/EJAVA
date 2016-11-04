@@ -17,9 +17,12 @@
 				Password:
                                 <h:inputSecret value="#{registerView.password}"/>
 
-				<h:panelGroup/>
+		      </h:panelGrid> 
+                      <h:panelGrid columns="2">
                                 <h:commandButton value="Register" action="#{registerView.registerUser()}"/>
                                 <h:link value="Login" outcome="Login" />
+                                <h:panelGroup/>
+                                
 			</h:panelGrid>
 		</h:form>
         </div>
