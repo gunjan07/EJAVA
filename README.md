@@ -1,8 +1,8 @@
 # EJAVA
 
-WEEK04_ca:
+WEEK04_ca:        
 Following are the url's
-
+    
 1. Register Page:
 http://localhost:8080/week04_ca/faces/register.xhtml
 
