@@ -42,7 +42,7 @@ public class Pod implements Serializable {
         private int ackid;
         
         @OneToOne
-        @JoinColumn(name="fk_pkg_id",referencedColumnName="pkg_id")
+        @JoinColumn(name="pkg_id",referencedColumnName="pkg_id")
         private delivery delivery;
 
     /**

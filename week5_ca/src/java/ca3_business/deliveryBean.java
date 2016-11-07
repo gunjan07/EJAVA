@@ -20,7 +20,6 @@ public class deliveryBean {
     @PersistenceContext private EntityManager em;
     
     public delivery create(delivery d) {
-        System.out.println("delivery "+d.getAddress());
 			em.persist(d);
                         System.out.println("created delivery");
                         return d;

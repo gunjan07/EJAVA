@@ -9,9 +9,11 @@ import ca3_business.PodBean;
 import ca3_business.deliveryBean;
 import ca3_model.Pod;
 import ca3_model.delivery;
+import java.io.Serializable;
 import java.util.Date;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 /**
@@ -20,12 +22,13 @@ import javax.inject.Named;
  */
 @Named
 @RequestScoped
-public class deliveryView {
+public class deliveryView implements Serializable{
     @EJB private deliveryBean dBean;
     @EJB private PodBean pBean;
+    
     private String name;
     private String address;
-    private int phone;
+    private String phone;
    
 
 
@@ -35,6 +38,7 @@ public class deliveryView {
          d.setAddress(address);
          d.setName(name);
          d.setPhone(phone);
+         d.setDate(new Date());
          dBean.create(d);
          Pod pod=new Pod();
          pod.setDelivery(d);
@@ -73,14 +77,14 @@ public class deliveryView {
     /**
      * @return the phone
      */
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
     /**
      * @param phone the phone to set
      */
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
     

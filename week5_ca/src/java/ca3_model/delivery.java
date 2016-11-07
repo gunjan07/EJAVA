@@ -42,13 +42,14 @@ public class delivery implements Serializable {
 	private String address;
         
         @Column(name = "phone")
-	private int phone;
+	private String phone;
         
         @Column(name = "create_date")
 	private Date date;
         
         @OneToOne(mappedBy="delivery")
         private Pod pod;
+        
 
     /**
      * @return the pkgid
@@ -88,14 +89,14 @@ public class delivery implements Serializable {
     /**
      * @return the phone
      */
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
     /**
      * @param phone the phone to set
      */
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
